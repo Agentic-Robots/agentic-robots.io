@@ -3,131 +3,193 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Agentic Robots — language-grounded autonomy for the physical world</title>
-<meta name="description" content="Agentic Robots builds language-grounded autonomous mobile robots and manipulators — turning natural-language intent into safe, real-world action.">
+<title>Agentic Robots — physical AI for healthcare & hospitality</title>
+<meta name="description" content="Agentic Robots builds augmented-reality experiences for senior living and autonomous housekeeping & delivery robots for hotels and hospitals — taking the repetitive physical work off human hands.">
 <meta property="og:title" content="Agentic Robots">
-<meta property="og:description" content="Robots that understand language and act in the physical world.">
+<meta property="og:description" content="AR for senior living. Autonomous service & delivery robots for hotels and hospitals.">
 <meta property="og:type" content="website">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🤖</text></svg>">
 <style>
   :root{
-    --bg:#070810; --panel:#0d0f1a; --line:#1c2233; --fg:#eef1f8; --muted:#9aa3b8;
-    --accent:#5b8cff; --accent2:#a98bff; --good:#39d98a;
-    --r:16px; --max:1120px;
+    --bg:#06070d; --bg2:#0b0d18; --panel:#0e1120; --line:#1b2236; --fg:#eef1f8; --muted:#97a1b8;
+    --care:#2dd4bf;          /* healthcare / AR */
+    --host:#818cf8;          /* hospitality / service robots */
+    --max:1140px; --r:18px;
   }
   *{box-sizing:border-box;margin:0;padding:0}
   html{scroll-behavior:smooth}
   body{font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
-    background:var(--bg);color:var(--fg);-webkit-font-smoothing:antialiased;line-height:1.5;overflow-x:hidden}
+    background:var(--bg);color:var(--fg);-webkit-font-smoothing:antialiased;line-height:1.55;overflow-x:hidden}
   a{color:inherit;text-decoration:none}
   .wrap{max-width:var(--max);margin:0 auto;padding:0 24px}
+  .btn{display:inline-block;padding:12px 20px;border-radius:11px;font-weight:650;font-size:15px;transition:.16s;border:1px solid transparent}
+  .btn.primary{background:linear-gradient(100deg,var(--care),var(--host));color:#04101a}
+  .btn.primary:hover{filter:brightness(1.08);transform:translateY(-1px)}
+  .btn.ghost{border-color:var(--line);color:var(--fg)}
+  .btn.ghost:hover{border-color:#34405c;background:#11141f}
+  .eyebrow{font-weight:700;font-size:12.5px;letter-spacing:.16em;text-transform:uppercase}
   /* nav */
-  header{position:sticky;top:0;z-index:50;backdrop-filter:blur(12px);
-    background:rgba(7,8,16,.72);border-bottom:1px solid var(--line)}
-  nav{display:flex;align-items:center;justify-content:space-between;height:66px}
-  .logo{display:flex;align-items:center;gap:11px;font-weight:700;letter-spacing:-.01em}
-  .logo .dot{width:11px;height:11px;border-radius:50%;
-    background:radial-gradient(circle at 30% 30%,#9cb8ff,var(--accent));box-shadow:0 0 14px var(--accent)}
-  .navlinks{display:flex;gap:30px;align-items:center}
+  header{position:sticky;top:0;z-index:60;backdrop-filter:blur(12px);background:rgba(6,7,13,.72);border-bottom:1px solid var(--line)}
+  nav{display:flex;align-items:center;justify-content:space-between;height:68px}
+  .logo{display:flex;align-items:center;gap:11px;font-weight:750;letter-spacing:-.01em}
+  .logo .dot{width:12px;height:12px;border-radius:50%;background:linear-gradient(135deg,var(--care),var(--host));box-shadow:0 0 16px rgba(129,140,248,.7)}
+  .navlinks{display:flex;gap:28px;align-items:center}
   .navlinks a{color:var(--muted);font-size:14.5px;font-weight:500}
   .navlinks a:hover{color:var(--fg)}
-  .btn{display:inline-block;padding:11px 18px;border-radius:10px;font-weight:600;font-size:14.5px;transition:.15s}
-  .btn.primary{background:var(--accent);color:#05101f}
-  .btn.primary:hover{background:#7aa2ff;transform:translateY(-1px)}
-  .btn.ghost{border:1px solid var(--line);color:var(--fg)}
-  .btn.ghost:hover{border-color:#34405c;background:#11141f}
-  @media(max-width:680px){.navlinks .l{display:none}}
+  @media(max-width:720px){.navlinks .l{display:none}}
   /* hero */
-  .hero{position:relative;padding:120px 0 96px;text-align:center}
-  .hero::before{content:"";position:absolute;inset:-20% 0 auto 0;height:600px;z-index:-1;
-    background:radial-gradient(620px 360px at 50% 0%,rgba(91,140,255,.22),transparent 70%)}
-  .pill{display:inline-flex;align-items:center;gap:8px;padding:6px 14px;border:1px solid var(--line);
-    border-radius:999px;font-size:13px;color:var(--muted);margin-bottom:28px}
-  .pill .g{width:7px;height:7px;border-radius:50%;background:var(--good);box-shadow:0 0 10px var(--good)}
-  h1{font-size:clamp(38px,6.4vw,68px);line-height:1.04;letter-spacing:-.025em;font-weight:800;max-width:16ch;margin:0 auto}
-  .grad{background:linear-gradient(100deg,#86a8ff,var(--accent2) 60%,var(--accent));-webkit-background-clip:text;background-clip:text;color:transparent}
-  .sub{margin:26px auto 0;max-width:60ch;font-size:clamp(16px,2vw,20px);color:var(--muted)}
+  .hero{position:relative;padding:128px 0 92px;text-align:center}
+  .hero::before{content:"";position:absolute;inset:-15% -20% auto -20%;height:680px;z-index:-1;
+    background:radial-gradient(540px 320px at 32% 8%,rgba(45,212,191,.20),transparent 70%),
+               radial-gradient(560px 340px at 70% 0%,rgba(129,140,248,.22),transparent 70%)}
+  .pill{display:inline-flex;align-items:center;gap:8px;padding:7px 15px;border:1px solid var(--line);border-radius:999px;font-size:13px;color:var(--muted);margin-bottom:26px}
+  .pill .g{width:7px;height:7px;border-radius:50%;background:var(--care);box-shadow:0 0 10px var(--care)}
+  h1{font-size:clamp(38px,6.6vw,70px);line-height:1.03;letter-spacing:-.028em;font-weight:820;max-width:17ch;margin:0 auto}
+  .grad{background:linear-gradient(100deg,var(--care),var(--host) 70%);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .sub{margin:26px auto 0;max-width:62ch;font-size:clamp(16px,2vw,20px);color:var(--muted)}
   .hero .cta{margin-top:38px;display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+  .trust{margin-top:46px;color:#69728a;font-size:13px;letter-spacing:.06em}
+  .trust b{color:#aab3c8;font-weight:600}
   /* sections */
-  section{padding:84px 0}
-  .eyebrow{color:var(--accent);font-weight:600;font-size:13px;letter-spacing:.14em;text-transform:uppercase}
-  h2{font-size:clamp(27px,3.6vw,40px);letter-spacing:-.02em;font-weight:700;margin:12px 0 0}
-  .lede{color:var(--muted);max-width:62ch;margin-top:16px;font-size:17px}
-  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:18px;margin-top:46px}
-  .card{background:linear-gradient(180deg,var(--panel),#0a0c15);border:1px solid var(--line);
-    border-radius:var(--r);padding:26px;transition:.18s}
-  .card:hover{border-color:#2e3854;transform:translateY(-3px)}
-  .card .ic{width:42px;height:42px;border-radius:11px;display:grid;place-items:center;font-size:21px;
-    background:rgba(91,140,255,.12);border:1px solid rgba(91,140,255,.25);margin-bottom:16px}
-  .card h3{font-size:18px;letter-spacing:-.01em}
-  .card p{color:var(--muted);font-size:14.5px;margin-top:8px}
-  /* stats */
-  .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:18px;
-    border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:42px 0;margin-top:8px}
-  .stat .n{font-size:34px;font-weight:800;letter-spacing:-.02em}
-  .stat .k{color:var(--muted);font-size:14px;margin-top:4px}
+  section{padding:90px 0}
+  h2{font-size:clamp(28px,3.8vw,42px);letter-spacing:-.02em;font-weight:760;margin:12px 0 0;max-width:20ch}
+  .lede{color:var(--muted);max-width:60ch;margin-top:16px;font-size:17px}
+  /* solution split */
+  .split{display:grid;grid-template-columns:1.05fr .95fr;gap:46px;align-items:center}
+  .split.rev .copy{order:2}
+  @media(max-width:860px){.split{grid-template-columns:1fr;gap:30px}.split.rev .copy{order:0}}
+  ul.feat{list-style:none;margin-top:24px;display:grid;gap:12px}
+  ul.feat li{display:flex;gap:12px;align-items:flex-start;color:#c6cdde;font-size:15.5px}
+  ul.feat li .tick{flex:none;width:22px;height:22px;border-radius:7px;display:grid;place-items:center;font-size:12px;font-weight:800;margin-top:1px}
+  .care .tick{background:rgba(45,212,191,.14);color:var(--care);border:1px solid rgba(45,212,191,.3)}
+  .host .tick{background:rgba(129,140,248,.14);color:var(--host);border:1px solid rgba(129,140,248,.3)}
+  .care .eyebrow{color:var(--care)} .host .eyebrow{color:var(--host)}
+  /* visual card */
+  .viz{position:relative;border-radius:var(--r);border:1px solid var(--line);padding:30px;min-height:300px;
+    background:linear-gradient(180deg,var(--panel),#080a14);overflow:hidden}
+  .viz.care{box-shadow:inset 0 0 90px rgba(45,212,191,.08)}
+  .viz.host{box-shadow:inset 0 0 90px rgba(129,140,248,.08)}
+  .viz .glow{position:absolute;inset:auto -40px -60px auto;width:220px;height:220px;border-radius:50%;filter:blur(46px);opacity:.5}
+  .viz.care .glow{background:var(--care)} .viz.host .glow{background:var(--host)}
+  .chips{display:flex;flex-wrap:wrap;gap:10px;position:relative}
+  .chip{font-size:13px;padding:9px 13px;border-radius:10px;background:#0c0f1c;border:1px solid var(--line);color:#bcc4d6}
+  .viz .big{font-size:54px;margin-bottom:14px;position:relative}
+  /* markets */
+  .markets{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px;margin-top:46px}
+  .mk{background:linear-gradient(180deg,var(--panel),#080a14);border:1px solid var(--line);border-radius:var(--r);padding:26px;transition:.18s}
+  .mk:hover{transform:translateY(-3px);border-color:#2e3854}
+  .mk .ic{font-size:26px;margin-bottom:14px}
+  .mk h3{font-size:18px;letter-spacing:-.01em}
+  .mk p{color:var(--muted);font-size:14.5px;margin-top:8px}
+  /* vision */
+  .vision{text-align:center}
+  .vision p{font-size:clamp(20px,2.6vw,28px);font-weight:600;letter-spacing:-.01em;max-width:24ch;margin:18px auto 0;line-height:1.35}
+  .vision .em{color:transparent;background:linear-gradient(100deg,var(--care),var(--host));-webkit-background-clip:text;background-clip:text}
   /* cta band */
-  .band{background:linear-gradient(120deg,rgba(91,140,255,.14),rgba(169,139,255,.12));
-    border:1px solid var(--line);border-radius:24px;padding:56px 32px;text-align:center}
-  .band h2{max-width:18ch;margin:0 auto}
+  .band{background:linear-gradient(120deg,rgba(45,212,191,.12),rgba(129,140,248,.13));border:1px solid var(--line);border-radius:26px;padding:58px 32px;text-align:center}
+  .band h2{max-width:20ch;margin:0 auto}
   .band .cta{margin-top:28px;display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
-  footer{border-top:1px solid var(--line);padding:40px 0;color:var(--muted);font-size:14px}
+  footer{border-top:1px solid var(--line);padding:42px 0;color:var(--muted);font-size:14px}
   .frow{display:flex;justify-content:space-between;align-items:center;gap:18px;flex-wrap:wrap}
-  footer a{color:var(--muted)} footer a:hover{color:var(--fg)}
+  footer a:hover{color:var(--fg)}
 </style>
 </head>
 <body>
 <header><div class="wrap"><nav>
   <a class="logo" href="/"><span class="dot"></span> Agentic&nbsp;Robots</a>
   <div class="navlinks">
-    <a class="l" href="#platform">Platform</a>
-    <a class="l" href="#capabilities">Capabilities</a>
-    <a class="l" href="#contact">Contact</a>
-    <a class="btn primary" href="mailto:hello@agentic-robots.ai">Get in touch</a>
+    <a class="l" href="#healthcare">Healthcare</a>
+    <a class="l" href="#hospitality">Hospitality</a>
+    <a class="l" href="#vision">Vision</a>
+    <a class="btn primary" href="mailto:hello@agentic-robots.ai">Partner with us</a>
   </div>
 </nav></div></header>
 
 <main>
   <section class="hero"><div class="wrap">
-    <span class="pill"><span class="g"></span> Physical AI · building in 2026</span>
-    <h1>Robots that <span class="grad">understand language</span> and act in the physical world.</h1>
-    <p class="sub">Agentic Robots turns natural‑language intent into safe, real‑world action — language‑grounded autonomy for mobile robots and manipulators, starting in the field and scaling beyond.</p>
+    <span class="pill"><span class="g"></span> Physical AI for healthcare &amp; hospitality</span>
+    <h1>Robots and <span class="grad">augmented reality</span>, in the places that care for people.</h1>
+    <p class="sub">Agentic Robots builds AR experiences for senior living and autonomous service robots for hotels and hospitals — taking the repetitive, physical, around‑the‑clock work off human hands, so caregivers and staff can focus on people.</p>
     <div class="cta">
-      <a class="btn primary" href="mailto:hello@agentic-robots.ai">Work with us</a>
-      <a class="btn ghost" href="#platform">See the platform ↓</a>
+      <a class="btn primary" href="mailto:hello@agentic-robots.ai">Partner with us</a>
+      <a class="btn ghost" href="#healthcare">What we build ↓</a>
+    </div>
+    <div class="trust">Built for <b>senior‑living communities</b> · <b>hotels &amp; resorts</b> · <b>hospitals &amp; clinics</b></div>
+  </div></section>
+
+  <!-- HEALTHCARE / AR -->
+  <section id="healthcare"><div class="wrap">
+    <div class="split care">
+      <div class="copy">
+        <span class="eyebrow">Healthcare · Senior living</span>
+        <h2>Augmented reality that brings comfort, memory, and connection to elder care.</h2>
+        <p class="lede">Gentle, immersive AR designed with caregivers and built for dignity — helping residents of old‑age homes stay engaged, oriented, and connected to the people they love.</p>
+        <ul class="feat">
+          <li><span class="tick">✓</span><span><b>Reminiscence &amp; cognitive engagement</b> — familiar places, music, and memories rendered around the resident to spark recall and calm.</span></li>
+          <li><span class="tick">✓</span><span><b>Wayfinding &amp; orientation</b> — soft, in‑view guidance through hallways and routines, reducing confusion and falls.</span></li>
+          <li><span class="tick">✓</span><span><b>Family telepresence</b> — distant loved ones brought into the room, not trapped behind a small screen.</span></li>
+          <li><span class="tick">✓</span><span><b>Caregiver insight</b> — lightweight dashboards so staff see what helps each resident, without the clipboard.</span></li>
+        </ul>
+      </div>
+      <div class="viz care"><span class="glow"></span>
+        <div class="big">🧠✨</div>
+        <div class="chips">
+          <span class="chip">Reminiscence therapy</span><span class="chip">Calming environments</span>
+          <span class="chip">Orientation &amp; wayfinding</span><span class="chip">Family presence</span>
+          <span class="chip">Caregiver dashboard</span><span class="chip">Dignity‑first design</span>
+        </div>
+      </div>
     </div>
   </div></section>
 
-  <section id="platform"><div class="wrap">
-    <span class="eyebrow">The platform</span>
-    <h2>From a sentence to a safe trajectory.</h2>
-    <p class="lede">We connect vision‑language understanding to real robot control: parse an instruction, ground it against the scene, plan waypoints that respect the constraints, and execute — closing the loop from perception to action.</p>
-    <div class="stats">
-      <div class="stat"><div class="n">NL&nbsp;→&nbsp;action</div><div class="k">language-conditioned control</div></div>
-      <div class="stat"><div class="n">Field‑ready</div><div class="k">sim‑to‑real, outdoor & in‑the‑wild</div></div>
-      <div class="stat"><div class="n">Edge</div><div class="k">runs on‑robot, low latency</div></div>
-      <div class="stat"><div class="n">Open</div><div class="k">research‑grounded, reproducible</div></div>
+  <!-- HOSPITALITY / SERVICE ROBOTS -->
+  <section id="hospitality" style="background:linear-gradient(180deg,transparent,var(--bg2) 12%,var(--bg2) 88%,transparent)"><div class="wrap">
+    <div class="split host rev">
+      <div class="copy">
+        <span class="eyebrow">Hospitality · Hotels &amp; hospitals</span>
+        <h2>Autonomous housekeeping and delivery that never clocks out.</h2>
+        <p class="lede">Fleets of human‑aware robots that handle the legwork inside hotels and hospitals — navigating elevators, corridors, and crowds safely, 24/7, so your team isn't running deliveries all shift.</p>
+        <ul class="feat">
+          <li><span class="tick">✓</span><span><b>In‑hotel food &amp; room‑service delivery</b> — meals, towels, and amenities to the door, autonomously.</span></li>
+          <li><span class="tick">✓</span><span><b>Hospital medicine &amp; supply runs</b> — secure, traceable delivery of medications and supplies between wards.</span></li>
+          <li><span class="tick">✓</span><span><b>Housekeeping support</b> — restocking, linen and waste runs that free staff for guest‑ and patient‑facing work.</span></li>
+          <li><span class="tick">✓</span><span><b>Elevator &amp; door integration + safe navigation</b> — robots that ride lifts, open doors, and move politely around people.</span></li>
+        </ul>
+      </div>
+      <div class="viz host"><span class="glow"></span>
+        <div class="big">🤖🛎️</div>
+        <div class="chips">
+          <span class="chip">Room‑service delivery</span><span class="chip">Medicine delivery</span>
+          <span class="chip">Supply &amp; linen runs</span><span class="chip">Elevator integration</span>
+          <span class="chip">24/7 operation</span><span class="chip">Human‑aware navigation</span>
+        </div>
+      </div>
     </div>
   </div></section>
 
-  <section id="capabilities"><div class="wrap">
-    <span class="eyebrow">Capabilities</span>
-    <h2>Built for the messy real world.</h2>
-    <div class="grid">
-      <div class="card"><div class="ic">🗣️</div><h3>Language grounding</h3><p>Vision‑language models that map free‑form commands to objects, regions, and constraints in the live scene.</p></div>
-      <div class="card"><div class="ic">🧭</div><h3>Autonomous navigation</h3><p>Constraint‑aware waypoint generation for mobile robots — rows, lanes, avoidances, and goals, satisfied together.</p></div>
-      <div class="card"><div class="ic">🦾</div><h3>Mobile manipulation</h3><p>Coordinated base + arm behavior to inspect, pick, and place where the work actually is.</p></div>
-      <div class="card"><div class="ic">🌾</div><h3>Agriculture first</h3><p>Proven where autonomy is hardest — orchards and fields — then generalized to the broader physical world.</p></div>
-      <div class="card"><div class="ic">🔁</div><h3>Sim‑to‑real</h3><p>Train in simulation, deploy on hardware, recover gracefully when reality disagrees.</p></div>
-      <div class="card"><div class="ic">⚡</div><h3>On‑edge inference</h3><p>Compact, distilled models that run on‑robot for real‑time decisions without the cloud.</p></div>
+  <!-- MARKETS -->
+  <section><div class="wrap">
+    <span class="eyebrow" style="color:var(--muted)">Who we serve</span>
+    <h2>One platform, the places that run on care.</h2>
+    <div class="markets">
+      <div class="mk"><div class="ic">🏡</div><h3>Senior living</h3><p>AR for engagement, orientation, and family connection — designed around residents and the caregivers who support them.</p></div>
+      <div class="mk"><div class="ic">🏨</div><h3>Hotels &amp; resorts</h3><p>Autonomous room‑service and food delivery plus housekeeping support — better guest experience, less running around.</p></div>
+      <div class="mk"><div class="ic">🏥</div><h3>Hospitals &amp; clinics</h3><p>Reliable medicine and supply delivery between wards, so clinical staff stay with patients, not in the hallway.</p></div>
     </div>
   </div></section>
 
-  <section id="contact"><div class="wrap">
+  <!-- VISION -->
+  <section id="vision" class="vision"><div class="wrap">
+    <span class="eyebrow" style="color:var(--muted)">Why now</span>
+    <p>Aging populations and staffing shortages are colliding with care that's harder to deliver. <span class="em">We build robots safe around people, and AR that treats every resident with dignity</span> — so the humans get their time back.</p>
+  </div></section>
+
+  <!-- CTA -->
+  <section><div class="wrap">
     <div class="band">
-      <span class="eyebrow">Get in touch</span>
-      <h2>Building the future of physical AI.</h2>
-      <p class="lede" style="margin:16px auto 0">Partnerships, pilots, and roles — we’d love to hear from you.</p>
+      <span class="eyebrow" style="color:var(--muted)">Get in touch</span>
+      <h2>Pilots, partnerships, and roles — let's talk.</h2>
+      <p class="lede" style="margin:16px auto 0">Running a senior community, hotel, or hospital — or want to build this with us? We'd love to hear from you.</p>
       <div class="cta">
         <a class="btn primary" href="mailto:hello@agentic-robots.ai">hello@agentic-robots.ai</a>
         <a class="btn ghost" href="https://github.com/Agentic-Robots">GitHub</a>
